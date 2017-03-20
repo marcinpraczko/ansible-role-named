@@ -4,5 +4,11 @@
   remote_user: root
   gather_facts: True
 
+  pre_tasks:
+    - name: "Install software for debugging network"
+      yum:
+        state: present
+        name: net-tools
+
   roles:
     - role: "ansible-role-named"
