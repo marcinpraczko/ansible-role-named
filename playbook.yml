@@ -1,0 +1,8 @@
+---
+- name: "Testing installing BIND"
+  hosts: all
+  remote_user: root
+  gather_facts: True
+
+  roles:
+    - role: "ansible-role-named"

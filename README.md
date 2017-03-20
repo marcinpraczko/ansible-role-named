@@ -1,3 +1,13 @@
+This role is fork of following repository:
+
+- [[Ansible role: midnightconman.named](https://github.com/midnightconman/ansible-role-named)]
+
+Reasons of creating this fork and adjusting:
+ 
+- Named is still used
+- Role has nice structure and is flexible in terms of configuration
+- Was not working out of the box and some issues were not addressed
+  sine 2015
 
 This runbook requires that you enable this option "error_on_undefined_vars=False", this allows us to have un-balanced hashes and set default variable values in default/main.yml.
 
@@ -11,8 +21,47 @@ This runbook requires that you enable this option "error_on_undefined_vars=False
 
 ## Installation
 
+TODO: Update this
+
 ``` bash
 $ ansible-galaxy install midnightconman.named
+```
+
+## Testing
+
+- Originally role had ``travis`` file
+- Added molecule configuration to allow test this locally
+
+``Molecule`` allows test ansible roles locally by using ``docker`` or ``vagrant``.
+Also it allows run validation like ``serverspec`` or ``testinfra``.
+
+All of this allows test this role much easier.
+
+### Install required packages
+
+- Docker
+- Vagrant
+
+### Install molecule
+
+```bash
+# Install python virtual environment
+virtualenv venv
+source venv/bin/activate
+
+# Update common pip packages
+pip install -U pip setuptools wheel
+
+# Install molecule with required python packages
+pip install -r tests/requirements.txt
+```
+
+### Test with molecule
+
+Following command should allow test role
+
+```bash
+molecule test
 ```
 
 ## Getting started

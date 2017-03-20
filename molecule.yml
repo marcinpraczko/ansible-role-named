@@ -1,0 +1,17 @@
+---
+ansible:
+  verbose: 'vv'
+  retry_files_enabled: False
+dependency:
+  name: galaxy
+driver:
+  name: docker
+docker:
+  containers:
+    - name: midnightconman-fixes.named
+      image: centos
+      image_version: latest
+      ansible_groups:
+        - named_masters
+verifier:
+  name: testinfra
