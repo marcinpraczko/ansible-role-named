@@ -1,8 +1,8 @@
 ---
-- name: Stop named - RedHat
+- name: Reload named - RedHat
   service:
-    name={{ named_service_name }} 
-    state=stopped
+    name: "{{ named_service_name }}"
+    state: reloaded
   when: ansible_os_family == "RedHat"
 
 - name: Stop named - Debian

@@ -7,7 +7,7 @@
     group={{ named_group }}
     mode='0600'
   when: ansible_os_family == "RedHat"
-  notify: Stop named - RedHat
+  notify: Reload named - RedHat
 
 - name: Create included.conf File - RedHat
   template:
@@ -17,7 +17,7 @@
     group={{ named_group }}
     mode='0600'
   when: ansible_os_family == "RedHat"
-  notify: Stop named - RedHat
+  notify: Reload named - RedHat
 
 - name: Create zone Files - RedHat
   template:
@@ -28,4 +28,4 @@
     mode='0600'
   with_dict: "{{ named_zones }}"
   when: named_zones_create_masters and ansible_os_family == "RedHat"
-  notify: Stop named - RedHat
+  notify: Reload named - RedHat
