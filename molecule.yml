@@ -5,13 +5,40 @@ ansible:
 dependency:
   name: galaxy
 driver:
-  name: docker
+  name: vagrant
 docker:
+  # TODO: ERROR: "no service or tool found for: named"
+  # https://github.com/marcinpraczko/ansible-role-named/issues/6
+  # Links with potencial help
+  # - https://github.com/docker/docker/issues/7459
+  # So far following directives not helps
+  #  privileged: True
+  #  volume_mounts:
+  #    - /run
+  #    - /sys/fs/cgroup:/sys/fs/cgroup:ro
   containers:
     - name: midnightconman-fixes.named
       image: centos
       image_version: latest
       ansible_groups:
         - named_masters
+vagrant:
+  raw_config_args:
+    - "ssh.insert_key = false"
+  platforms:
+    - name: centos/7
+      box: centos/7
+  providers:
+    - name: virtualbox
+      type: virtualbox
+
+  instances:
+    - name: testing-ansible-named
+      ansible_groups:
+        - group1
+      raw_config_args:
+        - "ssh.insert_key = false"
+        - "vm.synced_folder '.', '/vagrant', disabled: true"
+
 verifier:
   name: testinfra
