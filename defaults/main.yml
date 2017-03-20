@@ -70,6 +70,15 @@ named_conf_zone_expire: 86400
 named_conf_zone_expire_min: 3000
 named_zones:
   foo_com:
+    ttl: "{{ named_conf_zone_ttl }}"
+    soa: "{{ named_conf_zone_soa}}"
+    refresh: "{{ named_conf_zone_refresh }}"
+    retry: "{{ named_conf_zone_retry }}"
+    expire: "{{ named_conf_zone_expire }}"
+    expire_min: "{{ named_conf_zone_expire_min }}"
+    type: master
+    allow_transfer: 127.0.0.1
+    allow_notify: 127.0.0.1
     nameserver_in:
       - ns1.foo.com.
       - ns2.foo.com.
