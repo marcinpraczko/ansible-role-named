@@ -15,8 +15,11 @@
 #  when: ansible_os_family == "RedHat"
 #  tags: install
 
-- name: Install Service RedHat
+- name: "Install Service | RedHat"
   yum:
-    name='bind'
-    state='present'
+    name: "{{ item }}"
+    state: "present"
+  with_items:
+    - bind
+    - bind-utils
   tags: install

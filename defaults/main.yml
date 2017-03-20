@@ -7,7 +7,7 @@ named_service_file: /etc/init.d/named
 
 # Make sure these are correct for your os
 named_user: root
-named_group: root
+named_group: named
 named_service_name: named
 
 ## Monit specific settings

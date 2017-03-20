@@ -1,9 +1,5 @@
 ---
 # Maybe later we can add some removal tasks
-- include: install_base.yml
-  tags:
-    - install
-
 - include: install_debian.yml
   when: ansible_os_family == "Debian"
   tags:
@@ -14,12 +10,13 @@
   tags:
     - install
 
+- include: install_base.yml
+  tags:
+    - install
+
 - include: configure_base.yml
   tags:
     - configure
-
-- debug:
-    var: named_zones
 
 - include: configure_debian.yml
   when: ansible_os_family == "Debian"

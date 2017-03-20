@@ -5,6 +5,7 @@
     owner={{ named_user }}
     group={{ named_group }}
     state='directory'
+    mode='0770'
   tags: install
 
 - name: Create includes Directory
@@ -21,23 +22,4 @@
     owner={{ named_user }}
     group={{ named_group }}
     state='directory'
-  tags: install
-
-- name: Create User Group
-  group:
-    name='named'
-    gid=25
-    state='present'
-  when: named_travis_ci is not defined
-  tags: install
-
-- name: Add User
-  user:
-    name='named'
-    uid=25
-    group='named'
-    home={{ named_conf_directory }}
-    shell='/sbin/nologin'
-    system='yes'
-  when: named_travis_ci is not defined
   tags: install
