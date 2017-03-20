@@ -18,6 +18,9 @@
   tags:
     - configure
 
+- debug:
+    var: named_zones
+
 - include: configure_debian.yml
   when: ansible_os_family == "Debian"
   tags:

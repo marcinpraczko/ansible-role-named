@@ -26,6 +26,6 @@
     owner={{ named_user }}
     group={{ named_group }}
     mode='0600'
-  with_dict: named_zones
+  with_dict: "{{ named_zones }}"
   when: named_zones_create_masters and ansible_os_family == "Debian"
   notify: Stop named - Debian
