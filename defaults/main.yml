@@ -77,8 +77,10 @@ named_zones:
     expire: "{{ named_conf_zone_expire }}"
     expire_min: "{{ named_conf_zone_expire_min }}"
     type: master
-    allow_transfer: 127.0.0.1
-    allow_notify: 127.0.0.1
+    allow_transfer:
+      - 127.0.0.1
+    allow_notify:
+      - 127.0.0.1
     nameserver_in:
       - ns1.foo.com.
       - ns2.foo.com.
