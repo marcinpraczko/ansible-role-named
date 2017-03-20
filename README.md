@@ -9,12 +9,9 @@ Reasons of creating this fork and adjusting:
 - Was not working out of the box and some issues were not addressed
   sine 2015
 
-This runbook requires that you enable this option "error_on_undefined_vars=False", this allows us to have un-balanced hashes and set default variable values in default/main.yml.
-
-
 # ansible-role-named
 
-[![Build Status](https://travis-ci.org/midnightconman/ansible-role-named.svg?branch=master)](https://travis-ci.org/midnightconman/ansible-role-named)
+TODO: Update those details
 
  - Requires Ansible 1.5+
  - Compatible with most versions of RHEL/CentOS 6.x, 7.x, Debian, and Ubuntu
@@ -61,8 +58,12 @@ pip install -r tests/requirements.txt
 Following command should allow test role
 
 ```bash
-molecule test
+molecule test --sudo
 ```
+
+Above command will run ``--sudo`` only for verifications tools, for example
+``testinfra`` or ``serverspec``, etc. This ``--sudo`` option has no effect
+how ansible is running.
 
 ## Getting started
 

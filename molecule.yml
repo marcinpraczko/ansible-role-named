@@ -1,6 +1,14 @@
 ---
+molecule:
+  ignore_paths:
+    - .git
+    - .vagrant
+    - .molecule
+    - .idea
+    - venv
 ansible:
-  verbose: 'vv'
+#  verbose: 'vv'
+  verbose: 'v'
   retry_files_enabled: False
 dependency:
   name: galaxy
@@ -39,6 +47,5 @@ vagrant:
       raw_config_args:
         - "ssh.insert_key = false"
         - "vm.synced_folder '.', '/vagrant', disabled: true"
-
 verifier:
   name: testinfra

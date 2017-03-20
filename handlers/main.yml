@@ -6,12 +6,12 @@
   when: ansible_os_family == "RedHat"
 
 - name: Stop named - Debian
-  service: 
-    name=bind9 
+  service:
+    name=bind9
     state=stopped
   when: ansible_os_family == "Debian"
 
 - name: Reload monit
-  service: 
-    name={{ named_monit_service_name }} 
+  service:
+    name={{ named_monit_service_name }}
     state=reloaded
