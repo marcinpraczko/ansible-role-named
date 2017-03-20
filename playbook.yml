@@ -5,10 +5,13 @@
   gather_facts: True
 
   pre_tasks:
-    - name: "Install software for debugging network"
+    - name: "Install useful software for debugging"
       yum:
         state: present
-        name: net-tools
+        name: "{{ item }}"
+      with_items:
+        - net-tools
+        - which
 
   roles:
     - role: "ansible-role-named"
