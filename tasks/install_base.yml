@@ -1,25 +1,22 @@
 ---
-- name: Create log Directory
+- name: "Install | Ensure 'LOG' directory exists"
   file:
-    path={{ named_conf_logging_file_directory }}
-    owner={{ named_user }}
-    group={{ named_group }}
-    state='directory'
-    mode='0770'
-  tags: install
+    path: "{{ named_conf_logging_file_directory }}"
+    owner: "{{ named_user }}"
+    group: "{{ named_group }}"
+    state: "directory"
+    mode: "0770"
 
-- name: Create includes Directory
+- name: "Install | Ensure 'INCLUDES' directory exists"
   file:
-    path={{ named_conf_includes_directory }}
-    owner={{ named_user }}
-    group={{ named_group }}
-    state='directory'
-  tags: install
+    path: "{{ named_conf_includes_directory }}"
+    owner: "{{ named_user }}"
+    group: "{{ named_group }}"
+    state: "directory"
 
-- name: Create zone masters Directory
+- name: "Install | Ensure 'Master-zones' directory exists"
   file:
-    path={{ named_conf_directory }}/masters
-    owner={{ named_user }}
-    group={{ named_group }}
-    state='directory'
-  tags: install
+    path: "{{ named_conf_directory }}/masters"
+    owner: "{{ named_user }}"
+    group: "{{ named_group }}"
+    state: "directory"

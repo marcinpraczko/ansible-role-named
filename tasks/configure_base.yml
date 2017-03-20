@@ -1,10 +1,10 @@
 ---
-- name: Create monit File
+- name: "Configure | Create monit File"
   template:
-    src='monit.conf.j2'
-    dest={{ named_monit_conf_directory }}/named
-    owner={{ named_user }}
-    group={{ named_group }}
-    mode='0600 '
+    src: "monit.conf.j2"
+    dest: "{{ named_monit_conf_directory }}/named"
+    owner: "{{ named_user }}"
+    group: "{{ named_group }}"
+    mode: "0600"
   notify: Reload monit
   when: named_monit_enable

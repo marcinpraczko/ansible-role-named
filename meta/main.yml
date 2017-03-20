@@ -1,9 +1,9 @@
 ---
 galaxy_info:
-  author: Jon Campbell
+  author: Marcin Praczko
   description: A highly configurable role for BIND (named) versions >9
   license: GNU GPLv2
-  min_ansible_version: 1.5
+  min_ansible_version: 2.0
 
   platforms:
   - name: EL
