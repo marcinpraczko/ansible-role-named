@@ -6,8 +6,8 @@ Reasons of creating this fork and adjusting it:
  
 - ``Named`` is still used and would be nice to have working role.
 - Role has nice structure and is flexible in terms of configuration.
-- Was not working out of the box and some issues were not addressed
-  sine 2015.
+- This role didn't work out of the box and some issues were not addressed
+  since 2015.
 
 # ansible-role-named
 
@@ -95,14 +95,14 @@ $ ansible-playbook -i hosts named.yml
   remote_user: root
 
   roles:
-    - named
+    - "marcinpraczko.named"
 
 - name: Actions Needed to Get Slaves Into a Happy State
   hosts: named_slaves
   remote_user: root
 
   roles:
-    - named
+    - "marcinpraczko.named"
 ```
 
 #### Example Hosts

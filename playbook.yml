@@ -14,4 +14,4 @@
         - which
 
   roles:
-    - role: "ansible-role-named"
+    - role: "marcinpraczko.named"
