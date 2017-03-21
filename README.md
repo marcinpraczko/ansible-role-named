@@ -95,14 +95,14 @@ $ ansible-playbook -i hosts named.yml
   remote_user: root
 
   roles:
-    - named
+    - "marcinpraczko.named"
 
 - name: Actions Needed to Get Slaves Into a Happy State
   hosts: named_slaves
   remote_user: root
 
   roles:
-    - named
+    - "marcinpraczko.named"
 ```
 
 #### Example Hosts
