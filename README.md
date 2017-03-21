@@ -2,18 +2,16 @@ This role is fork of following repository:
 
 - [[Ansible role: midnightconman.named](https://github.com/midnightconman/ansible-role-named)]
 
-Reasons of creating this fork and adjusting:
+Reasons of creating this fork and adjusting it:
  
-- Named is still used
-- Role has nice structure and is flexible in terms of configuration
+- ``Named`` is still used and would be nice to have working role.
+- Role has nice structure and is flexible in terms of configuration.
 - Was not working out of the box and some issues were not addressed
-  sine 2015
+  sine 2015.
 
 # ansible-role-named
 
-TODO: Update those details
-
- - Requires Ansible 1.5+
+ - Requires Ansible 2.0+
  - Compatible with most versions of RHEL/CentOS 6.x, 7.x, Debian, and Ubuntu
 
 ## Installation
@@ -26,13 +24,13 @@ $ ansible-galaxy install midnightconman.named
 
 ## Testing
 
-- Originally role had ``travis`` file
-- Added molecule configuration to allow test this locally
+- Originally role had only ``travis`` file.
+- Added ``molecule`` configuration to allow test this role locally.
 
 ``Molecule`` allows test ansible roles locally by using ``docker`` or ``vagrant``.
-Also it allows run validation like ``serverspec`` or ``testinfra``.
+Also it helps run validation like ``serverspec`` or ``testinfra``.
 
-All of this allows test this role much easier.
+All of this make testing this role much easier.
 
 ### Install required packages
 
@@ -53,9 +51,12 @@ pip install -U pip setuptools wheel
 pip install -r tests/requirements.txt
 ```
 
-### Test with molecule
+### Testing with molecule
 
-Following command should allow test role
+Following command should allow test role with Vagrant driver.
+
+NOTE: Running following command first time is taking longer (Full Vagrant image must be downloaded to local
+      host).
 
 ```bash
 molecule test --sudo
@@ -69,22 +70,26 @@ how ansible is running.
 
 ### Installing BIND (named)
 
-Installing BIND (named) and all required dependencies is very simple and can be done before configuration or individually on it's own: 
+Installing BIND ``(named)`` and all required dependencies is very simple and can be done before configuration 
+or individually on it's own: 
 
 #### Install Only
-``` bash
-$ ansible-playbook -t install -i hosts, named.yml
+
+```bash
+$ ansible-playbook -t install -i hosts named.yml
 ```
+
 #### Run the Whole Playbook
-``` bash
-$ ansible-playbook -i hosts, named.yml
+
+```bash
+$ ansible-playbook -i hosts named.yml
 ```
 
 ### Example Playbook, Hosts, and Group Variables
 
 #### Example Playbook
-``` yml
----
+
+```yaml
 - name: Actions Needed to Get Masters Into a Happy State
   hosts: named_masters
   remote_user: root
@@ -101,7 +106,8 @@ $ ansible-playbook -i hosts, named.yml
 ```
 
 #### Example Hosts
-``` ini
+
+```ini
 [named_masters]
 127.0.0.1
 
@@ -111,9 +117,9 @@ $ ansible-playbook -i hosts, named.yml
 
 #### Example Group Variables
 
-named_masters:
-``` yml
----
+**named_masters:**
+
+```yaml
 named_acls:
   public_slaves:
     - 8.8.8.8
@@ -124,7 +130,7 @@ named_acls:
 
 named_zones:
 # Notice the _ here, this makes ansible happy and is replaced later in config 
-#  and zones automatically
+# and zones automatically
   foo_com:
     type: master
     allow_transfer:
@@ -132,35 +138,31 @@ named_zones:
     ttl: 3000
 ```
 
-named_slaves:
-``` yml
----
+**named_slaves:**
 
-named_zones_create_masters: False
+```yaml
+named_zones_create_masters: False 
 
 named_zones:
 # Notice the _ here, this makes ansible happy and is replaced later in config 
-#  and zones automatically
+# and zones automatically
   foo_com:
     type: slave
     master:
       - 7.7.7.7
 ```
 
-**NOTE**: You must enable the ansible.cfg setting of "error_on_undefined_vars=False" or the environment setting for this role to function correctly. If you do not, you will see errors like:
-
-```
-'msg': "AnsibleUndefinedVariable: One or more undefined variables: 'dict' object has no attribute 'allow_notify'", 'failed': True
-```
-
-This role consists of installing tasks and configuring tasks, which are tagged with either 'install' or 'configure' and can be run individually or all together. This role has actions for creating a named.conf file, an included.conf file which will hold acls and zone includes, and dynamic zone files based on default or group variables.
+This role consists of installing tasks and configuring tasks, which are tagged with either 
+``install`` or ``configure`` and can be run individually or all together. This role has actions 
+for creating a ``named.conf`` file and ``included.conf`` file which will hold acls and zone includes, 
+and dynamic zone files based on default or group variables.
 
 ## Configurables
  
-There are quite a few configurables in this role, here is a summarized list of stock defaults (an up-to-date list can be found in defaults/main.yml):
+There are quite a few configurables in this role, here is a summarized list of stock defaults
+(an up-to-date list can be found in ``defaults/main.yml``):
 
-``` yml
----
+```yaml
 ## Installation Options
 named_conf_file_location: /etc/named.conf
 
@@ -185,6 +187,10 @@ named_conf_listen_on_interface:
 named_conf_listen_on_v6_port: 53
 named_conf_listen_on_v6_interface:
   - ::1
+named_conf_notify: "no"
+named_conf_forwarders:
+  - 7.7.7.7
+  - 7.7.8.8
 named_conf_directory: /var/named
 named_conf_dump_file: /var/named/data/cache_dump.db
 named_conf_statistics_file: /var/named/data/named_stats.txt
@@ -230,15 +236,17 @@ named_conf_zone_expire: 86400
 named_conf_zone_expire_min: 3000
 ```
 
-Notice that you can specify default variables for dynamic zone file creation, this can allow for greatly reduced group_var files as you can only specify overrides for zones that require settings outside defaults.
+Notice that you can specify default variables for dynamic zone file creation, this can allow 
+for greatly reduced ``group_var`` files as you can only specify overrides for zones that require 
+settings outside defaults.
 
 
 ## Facts
 
 The following facts are accessible in your inventory or outside of this role.
 
-- `{{ ansible_local.named.interfaces_ipv4 }}`
-- `{{ ansible_local.named.interfaces_ipv6 }}`
-- `{{ ansible_local.named.port_ipv4 }}`
-- `{{ ansible_local.named.port_ipv6 }}`
+- ``{{ ansible_local.named.interfaces_ipv4 }}``
+- ``{{ ansible_local.named.interfaces_ipv6 }}``
+- ``{{ ansible_local.named.port_ipv4 }}``
+- ``{{ ansible_local.named.port_ipv6 }}``
 
