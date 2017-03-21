@@ -19,7 +19,7 @@ Reasons of creating this fork and adjusting it:
 TODO: Update this
 
 ``` bash
-$ ansible-galaxy install midnightconman.named
+$ ansible-galaxy install marcinpraczko.named
 ```
 
 ## Testing
