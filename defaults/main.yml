@@ -29,6 +29,11 @@ named_conf_listen_on_interface:
 named_conf_listen_on_v6_port: 53
 named_conf_listen_on_v6_interface:
   - ::1
+# NOTE: Setup the same as default NS servers
+named_conf_notify: "no"
+named_conf_forwarders:
+  - 7.7.7.7
+  - 7.7.8.8
 named_conf_directory: /var/named
 named_conf_dump_file: /var/named/data/cache_dump.db
 named_conf_statistics_file: /var/named/data/named_stats.txt

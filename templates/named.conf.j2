@@ -19,6 +19,12 @@ options {
     {% endfor -%}
     };
 
+    forwarders {
+    {% for host in named_conf_forwarders %}
+    {{ host }};
+    {% endfor -%}
+    };
+
     directory          "{{ named_conf_directory }}";
     dump-file          "{{ named_conf_dump_file }}";
     statistics-file    "{{ named_conf_statistics_file }}";
@@ -31,6 +37,7 @@ options {
     };
 
     allow-transfer  { "none"; };
+    notify: {{ named_conf_notify }};
     recursion {{ named_conf_recursion }};
 
     dnssec-enable {{ named_conf_dnssec_enable }};
