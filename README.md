@@ -6,12 +6,12 @@ Reasons of creating this fork and adjusting it:
  
 - ``Named`` is still used and would be nice to have working role.
 - Role has nice structure and is flexible in terms of configuration.
-- Was not working out of the box and some issues were not addressed
-  sine 2015.
+- This role didn't work out of the box and some issues were not addressed
+  since 2015.
 
 # ansible-role-named
 
- - Requires Ansible 2.0+
+ - Reqkuires Ansible 2.0+
  - Compatible with most versions of RHEL/CentOS 6.x, 7.x, Debian, and Ubuntu
 
 ## Installation
