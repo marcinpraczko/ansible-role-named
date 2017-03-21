@@ -37,7 +37,8 @@ options {
     };
 
     allow-transfer  { "none"; };
-    notify: {{ named_conf_notify }};
+    // DISABLED so far: Seems not working as expected
+    // notify: {{ named_conf_notify }};
     recursion {{ named_conf_recursion }};
 
     dnssec-enable {{ named_conf_dnssec_enable }};
