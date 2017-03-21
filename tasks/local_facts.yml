@@ -1,10 +1,10 @@
 ---
-- name: Create facts Directory
+- name: "Facts | Create facts Directory"
   file:
     path='/etc/ansible/facts.d'
     state='directory'
 
-- name: Create named Facts
+- name: "Facts | Create named Facts"
   template:
     src='named.fact.j2'
     dest='/etc/ansible/facts.d/named.fact'

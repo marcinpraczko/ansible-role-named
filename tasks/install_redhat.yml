@@ -1,22 +1,9 @@
 ---
-#- name: Install Dependencies RedHat
-#  yum:
-#    name={{ item }}
-#    state='present'
-#  with_items:
-#    - glibc
-#    - bind-libs
-#    - libcap
-#    - zlib
-#    - coreutils
-#    - libxml2
-#    - openssl
-#    - chkconfig
-#  when: ansible_os_family == "RedHat"
-#  tags: install
 
-- name: Install Service RedHat
+- name: "Install | RedHat | Install 'bind' service and tools"
   yum:
-    name='bind'
-    state='present'
-  tags: install
+    name: "{{ item }}"
+    state: "present"
+  with_items:
+    - bind
+    - bind-utils

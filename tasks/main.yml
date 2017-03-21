@@ -1,9 +1,5 @@
 ---
 # Maybe later we can add some removal tasks
-- include: install_base.yml
-  tags:
-    - install
-
 - include: install_debian.yml
   when: ansible_os_family == "Debian"
   tags:
@@ -11,6 +7,10 @@
 
 - include: install_redhat.yml
   when: ansible_os_family == "RedHat"
+  tags:
+    - install
+
+- include: install_base.yml
   tags:
     - install
 

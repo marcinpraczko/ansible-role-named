@@ -1,31 +1,31 @@
 ---
-- name: Create config File - Debian
+- name: "Configure | Debian | Create config File"
   template:
-    src='named.conf.j2'
-    dest={{ named_conf_file_location }}
-    owner={{ named_user }}
-    group={{ named_group }}
-    mode='0600'
+    src: "named.conf.j2"
+    dest: "{{ named_conf_file_location }}"
+    owner: "{{ named_user }}"
+    group: "{{ named_group }}"
+    mode: "0640"
   when: ansible_os_family == "Debian"
-  notify: Stop named - Debian
+  notify: Reload named - Debian
 
-- name: Create included.conf File - Debian
+- name: "Configure | Debian | Create included.conf File"
   template:
-    src='included.conf.j2'
-    dest={{ named_conf_includes_directory }}/included.conf
-    owner={{ named_user }}
-    group={{ named_group }}
-    mode='0600'
+    src: "included.conf.j2"
+    dest: "{{ named_conf_includes_directory }}/included.conf"
+    owner: "{{ named_user }}"
+    group: "{{ named_group }}"
+    mode: "0640"
   when: ansible_os_family == "Debian"
-  notify: Stop named - Debian
+  notify: Reload named - Debian
 
-- name: Create zone Files - Debian
+- name: "Configure | Debian | Create zone Files"
   template:
-    src='zone.j2'
-    dest={{ named_conf_directory }}/masters/{{ item.key | regex_replace('_', '.') }}.zone
-    owner={{ named_user }}
-    group={{ named_group }}
-    mode='0600'
-  with_dict: named_zones
+    src: "zone.j2"
+    dest: "{{ named_conf_directory }}/masters/{{ item.key | regex_replace('_', '.') }}.zone"
+    owner: "{{ named_user }}"
+    group: "{{ named_group }}"
+    mode: "0640"
+  with_dict: "{{ named_zones }}"
   when: named_zones_create_masters and ansible_os_family == "Debian"
-  notify: Stop named - Debian
+  notify: Reload named - Debian

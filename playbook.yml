@@ -1,0 +1,17 @@
+---
+- name: "Testing installing BIND"
+  hosts: all
+  remote_user: root
+  gather_facts: True
+
+  pre_tasks:
+    - name: "Install useful software for debugging"
+      yum:
+        state: present
+        name: "{{ item }}"
+      with_items:
+        - net-tools
+        - which
+
+  roles:
+    - role: "ansible-role-named"

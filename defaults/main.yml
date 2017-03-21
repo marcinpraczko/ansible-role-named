@@ -7,7 +7,7 @@ named_service_file: /etc/init.d/named
 
 # Make sure these are correct for your os
 named_user: root
-named_group: root
+named_group: named
 named_service_name: named
 
 ## Monit specific settings
@@ -20,13 +20,20 @@ named_monit_conf_directory: /etc/monit.d
 ## Options Section
 named_conf_listen_on_port: 53
 # Do not put "any" here, just IPs
+# TODO: So far hardcoded - however would be nice change this variables
+#       For example enumerate by inerfaces
+# NOTE: IP the same like for testing under molecule / Vagrant
 named_conf_listen_on_interface:
   - 127.0.0.1
-  - 7.7.7.7
-  - 192.168.25.5
+  - 192.168.0.100
 named_conf_listen_on_v6_port: 53
 named_conf_listen_on_v6_interface:
   - ::1
+# NOTE: Setup the same as default NS servers
+named_conf_notify: "no"
+named_conf_forwarders:
+  - 7.7.7.7
+  - 7.7.8.8
 named_conf_directory: /var/named
 named_conf_dump_file: /var/named/data/cache_dump.db
 named_conf_statistics_file: /var/named/data/named_stats.txt
@@ -70,9 +77,20 @@ named_conf_zone_expire: 86400
 named_conf_zone_expire_min: 3000
 named_zones:
   foo_com:
+    ttl: "{{ named_conf_zone_ttl }}"
+    soa: "{{ named_conf_zone_soa}}"
+    refresh: "{{ named_conf_zone_refresh }}"
+    retry: "{{ named_conf_zone_retry }}"
+    expire: "{{ named_conf_zone_expire }}"
+    expire_min: "{{ named_conf_zone_expire_min }}"
+    type: master
+    allow_transfer:
+      - 127.0.0.1
+    allow_notify:
+      - 127.0.0.1
     nameserver_in:
       - ns1.foo.com.
       - ns2.foo.com.
     records:
       - ns1 IN A 7.7.7.7
-      - ns2 IN A 7.7.7.7
+      - ns2 IN A 7.7.8.8

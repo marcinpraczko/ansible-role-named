@@ -1,0 +1,59 @@
+---
+molecule:
+  ignore_paths:
+    - .git
+    - .vagrant
+    - .molecule
+    - .idea
+    - venv
+ansible:
+#  verbose: 'vv'
+  verbose: 'v'
+  retry_files_enabled: False
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+docker:
+  # TODO: ERROR: "no service or tool found for: named"
+  # https://github.com/marcinpraczko/ansible-role-named/issues/6
+  # Links with potencial help
+  # - https://github.com/docker/docker/issues/7459
+  # So far following directives not helps
+  #  privileged: True
+  #  volume_mounts:
+  #    - /run
+  #    - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  containers:
+    - name: midnightconman-fixes.named
+      image: centos
+      image_version: latest
+      ansible_groups:
+        - named_masters
+vagrant:
+  raw_config_args:
+    - "ssh.insert_key = false"
+  platforms:
+    - name: centos/7
+      box: centos/7
+  providers:
+    - name: virtualbox
+      type: virtualbox
+
+  instances:
+    - name: testing-ansible-named
+      ansible_groups:
+        - group1
+      interfaces:
+        - network_name: private_network
+          type: dhcp
+          auto_config: true
+        - network_name: private_network
+          type: static
+          ip: 192.168.0.100
+          auto_config: true
+      raw_config_args:
+        - "vm.synced_folder '.', '/vagrant', disabled: true"
+        - "vm.network 'forwarded_port', guest: 53, host: 53, protocol: 'udp'"
+verifier:
+  name: testinfra
