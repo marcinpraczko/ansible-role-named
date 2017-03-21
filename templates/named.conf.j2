@@ -8,24 +8,28 @@
 
 options {
     listen-on port {{ named_conf_listen_on_port }} {
-{% for interface in named_conf_listen_on_interface -%}
-        {{ interface }}; 
-{% endfor -%}
-};
+    {% for interface in named_conf_listen_on_interface %}
+    {{ interface }};
+    {% endfor -%}
+    };
+
     listen-on-v6 port {{ named_conf_listen_on_v6_port }} {
-{% for interface in named_conf_listen_on_v6_interface -%}
-        {{ interface }}; 
-};
-{% endfor -%}
-    directory   "{{ named_conf_directory }}";
-    dump-file   "{{ named_conf_dump_file }}";
-        statistics-file "{{ named_conf_statistics_file }}";
-        memstatistics-file "{{ named_conf_memstatistics_file }}";
-    allow-query     {
-{% for host in named_conf_allow_query -%}
-        {{ host }}; 
-{% endfor -%}
-};
+    {% for interface in named_conf_listen_on_v6_interface %}
+    {{ interface }};
+    {% endfor -%}
+    };
+
+    directory          "{{ named_conf_directory }}";
+    dump-file          "{{ named_conf_dump_file }}";
+    statistics-file    "{{ named_conf_statistics_file }}";
+    memstatistics-file "{{ named_conf_memstatistics_file }}";
+
+    allow-query {
+    {% for host in named_conf_allow_query %}
+    {{ host }};
+    {% endfor -%}
+    };
+
     allow-transfer  { "none"; };
     recursion {{ named_conf_recursion }};
 
@@ -40,17 +44,18 @@ options {
 };
 
 logging {
-        channel {{ named_conf_logging_channel }} {
-                file "{{ named_conf_logging_file_directory }}/{{ named_conf_logging_file }}";
+    channel {{ named_conf_logging_channel }} {
+        file "{{ named_conf_logging_file_directory }}/{{ named_conf_logging_file }}";
         severity {{ named_conf_logging_severity }};
         print-severity {{ named_conf_logging_print_severity }};
         print-time {{ named_conf_logging_print_time }};
         print-category {{ named_conf_logging_print_category }};
-        };
+    };
+
     category {{ named_conf_logging_category_name }} {
-{% for category in named_conf_logging_categories -%}
-        {{ category }};
-{% endfor -%}
+    {% for category in named_conf_logging_categories %}
+    {{ category }};
+    {% endfor -%}
     };
 };
 
@@ -60,4 +65,3 @@ zone "." IN {
 };
 
 include "/etc/named/included.conf";
-

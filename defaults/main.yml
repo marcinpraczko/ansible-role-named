@@ -20,10 +20,12 @@ named_monit_conf_directory: /etc/monit.d
 ## Options Section
 named_conf_listen_on_port: 53
 # Do not put "any" here, just IPs
+# TODO: So far hardcoded - however would be nice change this variables
+#       For example enumerate by inerfaces
+# NOTE: IP the same like for testing under molecule / Vagrant
 named_conf_listen_on_interface:
   - 127.0.0.1
-  - 7.7.7.7
-  - 192.168.25.5
+  - 192.168.0.100
 named_conf_listen_on_v6_port: 53
 named_conf_listen_on_v6_interface:
   - ::1
@@ -86,4 +88,4 @@ named_zones:
       - ns2.foo.com.
     records:
       - ns1 IN A 7.7.7.7
-      - ns2 IN A 7.7.7.7
+      - ns2 IN A 7.7.8.8

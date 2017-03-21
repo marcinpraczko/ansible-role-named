@@ -44,8 +44,16 @@ vagrant:
     - name: testing-ansible-named
       ansible_groups:
         - group1
+      interfaces:
+        - network_name: private_network
+          type: dhcp
+          auto_config: true
+        - network_name: private_network
+          type: static
+          ip: 192.168.0.100
+          auto_config: true
       raw_config_args:
-        - "ssh.insert_key = false"
         - "vm.synced_folder '.', '/vagrant', disabled: true"
+        - "vm.network 'forwarded_port', guest: 53, host: 53, protocol: 'udp'"
 verifier:
   name: testinfra
