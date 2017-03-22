@@ -1,3 +1,5 @@
+# Quick info
+
 This role is fork of following repository:
 
 - [[Ansible role: midnightconman.named](https://github.com/midnightconman/ansible-role-named)]
@@ -9,62 +11,37 @@ Reasons of creating this fork and adjusting it:
 - This role didn't work out of the box and some issues were not addressed
   since 2015.
 
-# ansible-role-named
+
+# Ansible-role-named
 
  - Requires Ansible 2.0+
  - Compatible with most versions of RHEL/CentOS 6.x, 7.x, Debian, and Ubuntu
 
 ## Installation
 
-TODO: Update this
-
-``` bash
+### Directly from ansible-galaxy (latest release)
+```bash
 $ ansible-galaxy install marcinpraczko.named
 ```
 
-## Testing
+### Directly from github repository
 
-- Originally role had only ``travis`` file.
-- Added ``molecule`` configuration to allow test this role locally.
-
-``Molecule`` allows test ansible roles locally by using ``docker`` or ``vagrant``.
-Also it helps run validation like ``serverspec`` or ``testinfra``.
-
-All of this make testing this role much easier.
-
-### Install required packages
-
-- Docker
-- Vagrant
-
-### Install molecule
+Sometimes some changes has been applied to ``develop`` or ``feature`` branch and are not yet released.
+Ansible-galaxy allows install roles directly from ``GitHub``.
 
 ```bash
-# Install python virtual environment
-virtualenv venv
-source venv/bin/activate
-
-# Update common pip packages
-pip install -U pip setuptools wheel
-
-# Install molecule with required python packages
-pip install -r tests/requirements.txt
+mkdir testing-roles
+cd testing-roles
+ansible-galaxy install -p roles git+https://github.com/marcinpraczko/ansible-role-named.git,develop
 ```
 
-### Testing with molecule
+Above example will install ``develop`` branch. This can be adjusted to any git SHA commit, tag or branch
+name - depends of requirements.
 
-Following command should allow test role with Vagrant driver.
-
-NOTE: Running following command first time is taking longer (Full Vagrant image must be downloaded to local
-      host).
-
+Checking what version is installed can be done with command:
 ```bash
-molecule test --sudo
+ansible-galaxy list -p roles
 ```
-
-Above command will run ``--sudo`` only for verifications tools, for example
-``testinfra`` or ``serverspec``, etc. This ``--sudo`` option has no effect
-how ansible is running.
 
 ## Getting started
 
@@ -90,14 +67,14 @@ $ ansible-playbook -i hosts named.yml
 #### Example Playbook
 
 ```yaml
-- name: Actions Needed to Get Masters Into a Happy State
+- name: "Actions Needed to Get Masters Into a Happy State"
   hosts: named_masters
   remote_user: root
 
   roles:
     - "marcinpraczko.named"
 
-- name: Actions Needed to Get Slaves Into a Happy State
+- name: "Actions Needed to Get Slaves Into a Happy State"
   hosts: named_slaves
   remote_user: root
 
@@ -250,3 +227,49 @@ The following facts are accessible in your inventory or outside of this role.
 - ``{{ ansible_local.named.port_ipv4 }}``
 - ``{{ ansible_local.named.port_ipv6 }}``
 
+
+## Testing
+
+- Originally role had only ``travis`` file.
+- Added ``molecule`` configuration to allow test this role locally.
+
+``Molecule`` allows test ansible roles locally by using ``docker`` or ``vagrant``.
+Also it helps run validation like ``serverspec`` or ``testinfra``.
+
+All of this make testing this role much easier.
+
+### Install required packages
+
+- Docker
+- Vagrant
+
+### Install molecule
+
+- Install python virtual environment on your system.
+- Install ``molecule`` within python virtual environment.
+
+```bash
+virtualenv venv
+source venv/bin/activate
+
+# Update common pip packages
+pip install -U pip setuptools wheel
+
+# Install molecule with required python packages
+pip install -r tests/requirements.txt
+```
+
+### Testing with molecule
+
+Following command should allow test role with Vagrant driver.
+
+NOTE: Running following command first time is taking longer (Full Vagrant image must be downloaded to local
+      host).
+
+```bash
+molecule test --sudo
+```
+
+Above command will run ``--sudo`` only for verifications tools, for example
+``testinfra`` or ``serverspec``, etc. This ``--sudo`` option has no effect
+how ansible is running.
