@@ -1,14 +1,14 @@
 ---
-- name: "Reload named - RedHat"
+- name: "Restart named - RedHat"
   service:
     name: "{{ named_service_name }}"
-    state: reloaded
+    state: restarted
   when: ansible_os_family == "RedHat"
 
-- name: "Reload named - Debian"
+- name: "Restart named - Debian"
   service:
     name: "bind9"
-    state: reloaded
+    state: restarted
   when: ansible_os_family == "Debian"
 
 - name: "Reload monit"

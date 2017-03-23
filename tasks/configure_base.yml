@@ -8,3 +8,9 @@
     mode: "0600"
   notify: Reload monit
   when: named_monit_enable
+
+- name: "Configure | Ensure that 'named' is enabled and started"
+  service:
+    name: "{{ named_service_name }}"
+    enabled: True
+    state: started

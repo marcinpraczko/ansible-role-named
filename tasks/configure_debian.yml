@@ -7,7 +7,7 @@
     group: "{{ named_group }}"
     mode: "0640"
   when: ansible_os_family == "Debian"
-  notify: Reload named - Debian
+  notify: Restart named - Debian
 
 - name: "Configure | Debian | Create included.conf File"
   template:
@@ -17,7 +17,7 @@
     group: "{{ named_group }}"
     mode: "0640"
   when: ansible_os_family == "Debian"
-  notify: Reload named - Debian
+  notify: Restart named - Debian
 
 - name: "Configure | Debian | Create zone Files"
   template:
@@ -28,4 +28,4 @@
     mode: "0640"
   with_dict: "{{ named_zones }}"
   when: named_zones_create_masters and ansible_os_family == "Debian"
-  notify: Reload named - Debian
+  notify: Restart named - Debian
