@@ -42,8 +42,8 @@ named_conf_allow_query:
   - any
 #named_conf_allow_transfer: none
 named_conf_recursion: no
-named_conf_dnssec_enable: yes
-named_conf_dnssec_validation: yes
+named_conf_dnssec_enable: "no"
+named_conf_dnssec_validation: "no"
 named_conf_dnssec_lookaside: auto
 named_conf_bindkeys_file: /etc/named.iscdlv.key
 named_conf_managed_keys_directory: /var/named/dynamic
