@@ -13,7 +13,7 @@ Reasons of creating this fork and adjusting it:
 
 # Ansible-role-named
 
-**Version: 0.1.3**
+**Version: 0.1.4**
 
  - Requires Ansible 2.0+
  - Compatible with most versions of RHEL/CentOS 6.x, 7.x, Debian, and Ubuntu
