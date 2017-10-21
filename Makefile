@@ -20,4 +20,4 @@ usage:
 
 .PHONY: bump-ver-patch
 bump-ver-patch:
-	bumpversion --dry-run patch
+	bumpversion patch
