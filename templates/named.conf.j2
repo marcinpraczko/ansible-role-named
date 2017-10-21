@@ -49,6 +49,11 @@ options {
     bindkeys-file "{{ named_conf_bindkeys_file }}";
 
     managed-keys-directory "{{ named_conf_managed_keys_directory }}";
+
+    /* Enable query logs */
+    /* Nice example of logs */
+    /* https://stackoverflow.com/questions/11153958/how-to-enable-named-bind-dns-full-logging */
+    querylog yes;
 };
 
 logging {
