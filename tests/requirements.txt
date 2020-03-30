@@ -42,7 +42,7 @@ pyparsing==2.2.0
 pytest==3.0.7
 python-dateutil==2.6.0
 python-vagrant==0.5.14
-PyYAML==3.12
+PyYAML==5.3.1
 requests==2.13.0
 sh==1.11
 six==1.10.0
