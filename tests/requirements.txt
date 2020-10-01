@@ -50,3 +50,5 @@ tabulate==0.7.5
 testinfra==1.4.5
 websocket-client==0.40.0
 whichcraft==0.4.0
+
+urllib3>=1.25.9 # not directly required, pinned by Snyk to avoid a vulnerability
