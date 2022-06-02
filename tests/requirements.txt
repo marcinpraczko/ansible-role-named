@@ -11,7 +11,7 @@ chardet==2.3.0
 click==6.7
 colorama==0.3.7
 configparser==3.5.0
-cookiecutter==1.4.0
+cookiecutter==2.1.1
 cryptography==1.8.1
 docker==2.1.0
 docker-py==1.10.6
