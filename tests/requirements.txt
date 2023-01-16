@@ -18,7 +18,7 @@ docker-py==1.10.6
 docker-pycreds==0.2.1
 enum34==1.1.6
 flake8==3.0.4
-future==0.16.0
+future==0.18.3
 idna==2.5
 ipaddress==1.0.18
 Jinja2==2.10.1
