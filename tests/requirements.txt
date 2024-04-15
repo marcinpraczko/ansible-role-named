@@ -19,7 +19,7 @@ docker-pycreds==0.2.1
 enum34==1.1.6
 flake8==3.0.4
 future==0.16.0
-idna==2.5
+idna==3.7
 ipaddress==1.0.18
 Jinja2==2.10.1
 jinja2-time==0.2.0
